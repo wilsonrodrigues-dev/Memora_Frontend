@@ -1,9 +1,13 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import confetti from 'canvas-confetti';
-import { API_BASE_URL } from '../constants';
 
 function UploadForm({ onUploadSuccess, setView }) {
+
+const api=axios.create({
+  baseURL:"https://memora-0oah.onrender.com"
+})
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]);
   const [momentLabel, setMomentLabel] = useState('');
@@ -96,7 +100,7 @@ function UploadForm({ onUploadSuccess, setView }) {
         });
       }, 400);
 
-      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
+      const response = await api.post(`/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

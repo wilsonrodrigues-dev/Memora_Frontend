@@ -10,10 +10,13 @@ import Countdown from "./components/Countdown";
 import QuoteRotator from "./components/QuoteRotator";
 import MediaModal from "./components/MediaModal";
 import Footer from "./components/Footer";
-import { API_BASE_URL } from "./constants";
 import "./App.css";
 
 function App() {
+
+  const api=axios.create({
+    baseURL:"https://memora-0oah.onrender.com"
+  })
   const [view, setView] = useState("home"); // 'home', 'upload', 'success'
   const [archiveFiles, setArchiveFiles] = useState([]);
   const [loadingArchive, setLoadingArchive] = useState(false);
@@ -33,7 +36,7 @@ function App() {
   const fetchArchives = async () => {
     setLoadingArchive(true);
     try {
-      const response = await axios.get(`${API_BASE_URL}/upload`);
+      const response = await api.get(`/upload`);
       if (response.data && response.data.success) {
         setArchiveFiles(response.data.files);
       }
