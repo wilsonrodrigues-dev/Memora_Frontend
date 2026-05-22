@@ -15,7 +15,7 @@ import "./App.css";
 function App() {
 
   const api=axios.create({
-    baseURL:"https://memora-0oah.onrender.com"
+    baseURL:"https://memora-0oah.onrender.com/api"
   })
   const [view, setView] = useState("home"); // 'home', 'upload', 'success'
   const [archiveFiles, setArchiveFiles] = useState([]);
@@ -36,7 +36,7 @@ function App() {
   const fetchArchives = async () => {
     setLoadingArchive(true);
     try {
-      const response = await api.get(`/upload`);
+      const response = await axios.get(`/upload`);
       if (response.data && response.data.success) {
         setArchiveFiles(response.data.files);
       }

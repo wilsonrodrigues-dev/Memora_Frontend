@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 function UploadForm({ onUploadSuccess, setView }) {
 
 const api=axios.create({
-  baseURL:"https://memora-0oah.onrender.com"
+  baseURL:"https://memora-0oah.onrender.com/api"
 })
 
   const [selectedFiles, setSelectedFiles] = useState([]);
