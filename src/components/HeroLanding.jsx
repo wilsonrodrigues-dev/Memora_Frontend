@@ -36,7 +36,7 @@ const HeroLanding = () => {
           transition={{ duration: 1 }}
           className="tracking-[6px] text-sm text-yellow-600 mb-4"
         >
-          MCA FAREWELL EVENING · 2025
+          MCA FAREWELL EVENING · 2026
         </motion.p>
 
         <motion.h1
