@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./components/Header";
+import HeroLanding from "./components/HeroLanding";
+import InvitationEnvelope from "./components/InvitationEnvelope";
 import Hero from "./components/Hero";
 import LiveHighlights from "./components/LiveHighlights";
 import ArchiveSection from "./components/ArchiveSection";
@@ -110,6 +112,8 @@ function App() {
         {/* ================= HOMEPAGE VIEW ================= */}
         {view === "home" && (
           <div className="flex flex-col">
+              <HeroLanding />
+              <InvitationEnvelope />
             <Hero setView={setView} />
             {/* <LiveHighlights onViewArchive={() => {
               document.getElementById('archive')?.scrollIntoView({ behavior: 'smooth' });

@@ -1,8 +1,10 @@
 import React from 'react';
+import GoldenParticles from "./GoldenParticles";
 
 function Hero({ setView }) {
   return (
     <section className="relative h-[90vh] flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+      <GoldenParticles />
       <div className="floating-glow top-1/4 -left-1/4 opacity-40"></div>
       <div className="floating-glow bottom-1/4 -right-1/4 opacity-30" style={{ background: "radial-gradient(circle, rgba(255, 176, 205, 0.15) 0%, rgba(0, 0, 0, 0) 70%)" }}></div>
       
