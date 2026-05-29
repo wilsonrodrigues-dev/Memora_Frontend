@@ -12,6 +12,7 @@ import Countdown from "./components/Countdown";
 import QuoteRotator from "./components/QuoteRotator";
 import MediaModal from "./components/MediaModal";
 import Footer from "./components/Footer";
+import ServerWakeup from "./components/ServerWakeup";
 import "./App.css";
 
 function App() {
@@ -58,15 +59,19 @@ function App() {
   };
 
   const [serverLoading, setServerLoading] = useState(true);
+  const [serverReady, setServerReady] = useState(false);
 
   useEffect(() => {
     const wakeServer = async () => {
       try {
         await axios.get("https://memora-0oah.onrender.com");
-
-        setServerLoading(false);
+        // Server is up — tell the animation, but keep the screen until
+        // the animation's own exit timer fires onComplete.
+        setServerReady(true);
       } catch (error) {
         console.log(error);
+        // Retry after 3 s on failure so it truly keeps trying
+        setTimeout(wakeServer, 2000);
       }
     };
 
@@ -75,15 +80,10 @@ function App() {
 
   if (serverLoading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-black text-white">
-        <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-2">Starting Memora...</h1>
-
-          <p className="text-sm text-zinc-400">
-            Server is waking up, this may take a few seconds.
-          </p>
-        </div>
-      </div>
+      <ServerWakeup
+        serverReady={serverReady}
+        onComplete={() => setServerLoading(false)}
+      />
     );
   }
 

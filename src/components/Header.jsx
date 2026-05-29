@@ -7,7 +7,7 @@ function Header({ view, setView, mobileMenuOpen, setMobileMenuOpen }) {
         <div className="flex justify-between items-center px-4 md:px-16 h-full max-w-[1440px] mx-auto">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setView('home')}>
             <span className="material-symbols-outlined text-primary text-3xl">blur_on</span>
-            <span className="font-bold text-xl tracking-tighter text-primary brightness-125">MEMORA</span>
+            <span className="font-bold text-xl tracking-tighter text-primary brightness-125">TWILIGHT</span>
           </div>
 
           {/* Desktop Nav */}

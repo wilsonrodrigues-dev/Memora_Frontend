@@ -16,6 +16,7 @@ const api=axios.create({
   const [isPrivate, setIsPrivate] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadError, setUploadError] = useState(false);
 
   const fileInputRef = useRef(null);
   const dropZoneRef = useRef(null);
@@ -44,6 +45,7 @@ const api=axios.create({
     }));
 
     setFilePreviews((prev) => [...prev, ...newPreviews]);
+    setUploadError(false); // clear error when user picks new files
   };
 
   const removeFileFromQueue = (index) => {
@@ -144,7 +146,7 @@ const api=axios.create({
     } catch (error) {
       console.error(error);
       setIsUploading(false);
-      alert('Upload failed: ' + error.message);
+      setUploadError(true); // trigger Mega fallback banner
     }
   };
 
@@ -319,6 +321,63 @@ const api=axios.create({
             <p className="text-center text-[10px] text-on-surface-variant/40">
               Some memories deserve to outlive time itself.
             </p>
+
+            {/* ── Mega.nz fallback — shown only after a backend error ── */}
+            {uploadError && (
+              <div
+                style={{
+                  marginTop: 4,
+                  padding: "16px 20px",
+                  borderRadius: 16,
+                  background: "rgba(255,176,205,0.06)",
+                  border: "1px solid rgba(255,176,205,0.25)",
+                  boxShadow: "0 0 20px rgba(255,176,205,0.1)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ color: "#ffb0cd", fontSize: 22, flexShrink: 0, marginTop: 2 }}
+                  >
+                    warning
+                  </span>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: "#ffb0cd", margin: 0 }}>
+                      Upload server is temporarily unavailable
+                    </p>
+                    <p style={{ fontSize: 12, color: "rgba(207,194,215,0.6)", marginTop: 4, lineHeight: 1.5 }}>
+                      No worries — you can still share your memories using our backup link:
+                    </p>
+                    <a
+                      href="https://mega.nz/filerequest/5Ib0STSRURk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 8,
+                        marginTop: 12,
+                        padding: "10px 18px",
+                        borderRadius: 999,
+                        background: "linear-gradient(135deg, rgba(255,176,205,0.15), rgba(221,184,255,0.1))",
+                        border: "1px solid rgba(221,184,255,0.3)",
+                        color: "#ddb8ff",
+                        fontSize: 13,
+                        fontWeight: 600,
+                        textDecoration: "none",
+                        boxShadow: "0 0 16px rgba(221,184,255,0.15)",
+                        transition: "all 0.3s ease",
+                      }}
+                      onMouseEnter={e => e.currentTarget.style.boxShadow = "0 0 28px rgba(221,184,255,0.35)"}
+                      onMouseLeave={e => e.currentTarget.style.boxShadow = "0 0 16px rgba(221,184,255,0.15)"}
+                    >
+                      <span className="material-symbols-outlined" style={{ fontSize: 16 }}>cloud_upload</span>
+                      Upload via Mega.nz
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </aside>
 

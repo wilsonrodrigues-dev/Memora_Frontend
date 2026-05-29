@@ -1,6 +1,19 @@
 import React from 'react';
 import { DEFAULT_MEMORIES } from '../constants';
 
+// ── Fallback: images already sitting in /public ───────────────────────────────
+// Replace or extend this list when you add more files to /public.
+const PUBLIC_IMAGES = [
+  { id: 'pub-1', name: 'TWILIGHT 2K26',         src: '/main_loading_img.jpeg', mimeType: 'image/jpeg' },
+  { id: 'pub-2', name: 'Senior Moments',         src: '/s_img1.jpeg',           mimeType: 'image/jpeg' },
+  { id: 'pub-3', name: 'Farewell Evening',       src: '/s_img2.jpeg',           mimeType: 'image/jpeg' },
+  { id: 'pub-4', name: 'Class of 2026',          src: '/s_img3.jpeg',           mimeType: 'image/jpeg' },
+  { id: 'pub-5', name: 'Senior Moments II',      src: '/s_img1.jpeg',           mimeType: 'image/jpeg' },
+  { id: 'pub-6', name: 'Farewell Evening II',    src: '/s_img2.jpeg',           mimeType: 'image/jpeg' },
+  { id: 'pub-7', name: 'TWILIGHT Memories',      src: '/main_loading_img.jpeg', mimeType: 'image/jpeg' },
+  { id: 'pub-8', name: 'Class of 2026 II',       src: '/s_img3.jpeg',           mimeType: 'image/jpeg' },
+];
+
 const getMediaIcon = (mimeType) => {
   if (!mimeType) return 'draft';
   if (mimeType.startsWith('image/')) return 'image';
@@ -10,6 +23,9 @@ const getMediaIcon = (mimeType) => {
 };
 
 function ArchiveSection({ archiveFiles, loadingArchive, onSelectMedia }) {
+  // Use Drive files when available, fall back to local /public images
+  const displayFiles = archiveFiles && archiveFiles.length > 0 ? archiveFiles : PUBLIC_IMAGES;
+
   return (
     <section id="archive" className="py-24 px-6 md:px-16 max-w-[1440px] mx-auto w-full">
       <div className="text-center mb-16">
@@ -111,7 +127,7 @@ function ArchiveSection({ archiveFiles, loadingArchive, onSelectMedia }) {
 
   <div className="flex gap-6 animate-scroll w-max hover:[animation-play-state:paused]">
 
-    {[...archiveFiles, ...archiveFiles].map((file, idx) => (
+    {[...displayFiles, ...displayFiles].map((file, idx) => (
 
       <div
         key={`${file.id}-${idx}`}
@@ -139,6 +155,7 @@ function ArchiveSection({ archiveFiles, loadingArchive, onSelectMedia }) {
 
           <img
             src={
+              file.src ||
               file.thumbnailLink ||
               `https://lh3.googleusercontent.com/d/${file.id}=w1000`
             }

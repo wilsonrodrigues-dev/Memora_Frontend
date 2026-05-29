@@ -8,17 +8,18 @@ const InvitationEnvelope = () => {
   return (
     <section
       id="invitation"
-      className="relative min-h-screen bg-gradient-to-b from-black via-[#120b02] to-black flex flex-col items-center justify-center overflow-x-hidden px-6 py-20"
+      className="relative min-h-screen bg-[#050505] flex flex-col items-center justify-center overflow-x-hidden px-6 py-20"
     >
       {/* Background Glow */}
-      <div className="absolute w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-yellow-700/10 blur-2xl rounded-full"></div>
+      <div className="absolute w-[500px] md:w-[700px] h-[500px] md:h-[700px] rounded-full" style={{ background: "radial-gradient(circle, rgba(147,51,234,0.15) 0%, transparent 70%)", filter: "blur(80px)" }}></div>
 
       {/* Tiny Particles */}
       {[...Array(8)].map((_, i) => (
         <div
           key={i}
-          className="absolute w-[2px] h-[2px] bg-yellow-500 rounded-full opacity-20"
+          className="absolute w-[2px] h-[2px] rounded-full opacity-30"
           style={{
+            background: "#ddb8ff",
             top: `${10 + i * 10}%`,
             left: `${8 + i * 11}%`,
           }}
@@ -32,7 +33,7 @@ const InvitationEnvelope = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-4xl sm:text-5xl md:text-7xl text-center text-white font-['Cinzel'] mb-6 leading-tight"
+            className="text-4xl sm:text-5xl md:text-7xl text-center mb-6 leading-tight font-bold tracking-tight" style={{ fontFamily: "'Geist', sans-serif", background: "linear-gradient(135deg, #ffffff 20%, #ddb8ff 50%, #9333ea 85%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", filter: "drop-shadow(0 0 30px rgba(147,51,234,0.3))" }}
           >
             Your Invitation Awaits
           </motion.h2>
@@ -41,7 +42,7 @@ const InvitationEnvelope = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-yellow-500/80 tracking-[4px] text-sm md:text-base mb-10"
+            className="tracking-[4px] text-sm md:text-base mb-10" style={{ color: "rgba(221,184,255,0.6)" }}
           >
             Tap to Open
           </motion.p>
@@ -80,7 +81,7 @@ const InvitationEnvelope = () => {
                 md:h-[320px]
                 rounded-[24px]
                 border
-                border-yellow-600/30
+                border-[rgba(221,184,255,0.2)]
                 bg-gradient-to-b
                 from-[#1f1f1f]
                 via-[#141414]
@@ -90,12 +91,12 @@ const InvitationEnvelope = () => {
               "
             >
               {/* Gold Outline Glow */}
-              <div className="absolute inset-0 rounded-[24px] border border-yellow-500/10"></div>
+              <div className="absolute inset-0 rounded-[24px]" style={{ border: "1px solid rgba(221,184,255,0.08)", boxShadow: "inset 0 0 40px rgba(147,51,234,0.05)" }}></div>
 
               {/* Bottom Folds */}
-              <div className="absolute bottom-0 left-0 w-1/2 h-full border-r border-yellow-500/5 rotate-[35deg] origin-bottom"></div>
+              <div className="absolute bottom-0 left-0 w-1/2 h-full rotate-[35deg] origin-bottom" style={{ borderRight: "1px solid rgba(221,184,255,0.05)" }}></div>
 
-              <div className="absolute bottom-0 right-0 w-1/2 h-full border-l border-yellow-500/5 -rotate-[35deg] origin-bottom"></div>
+              <div className="absolute bottom-0 right-0 w-1/2 h-full -rotate-[35deg] origin-bottom" style={{ borderLeft: "1px solid rgba(221,184,255,0.05)" }}></div>
             </div>
 
             {/* TOP FLAP */}
@@ -132,12 +133,12 @@ const InvitationEnvelope = () => {
                   border-t
                   border-l
                   border-r
-                  border-yellow-500/40
+                  border-[rgba(221,184,255,0.25)]
                   shadow-[0_10px_20px_rgba(0,0,0,0.4)]
                 "
               >
                 {/* Gold Edge Glow */}
-                <div className="absolute inset-0 border border-yellow-500/10"></div>
+                <div className="absolute inset-0" style={{ border: "1px solid rgba(147,51,234,0.15)" }}></div>
               </div>
             </motion.div>
 
@@ -158,20 +159,20 @@ const InvitationEnvelope = () => {
 
                 rounded-full
                 border
-                border-yellow-500/40
+                border-[rgba(221,184,255,0.3)]
 
                 bg-gradient-to-b
-                from-[#1f1f1f]
+                from-[#1a1a2e]
                 to-[#0a0a0a]
 
                 flex
                 items-center
                 justify-center
 
-                shadow-[0_0_25px_rgba(212,175,55,0.15)]
+                shadow-[0_0_25px_rgba(147,51,234,0.3)]
               "
             >
-              <span className="text-yellow-500 tracking-[3px] text-[10px] md:text-xs">
+              <span className="tracking-[3px] text-[10px] md:text-xs font-semibold" style={{ color: "#ddb8ff" }}>
                 OPEN
               </span>
             </div>
@@ -197,10 +198,54 @@ const InvitationEnvelope = () => {
             }}
             className="relative z-30 flex justify-center items-center w-full"
           >
-            {/* Glow */}
-            <div className="absolute w-[90%] md:w-[600px] h-[90%] bg-yellow-500/10 blur-2xl rounded-3xl"></div>
+            {/* ── Layer 1: Wide ambient purple bloom ─────────────────── */}
+            <div
+              style={{
+                position: "absolute",
+                width: "110%",
+                maxWidth: 700,
+                height: "110%",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(ellipse, rgba(147,51,234,0.35) 0%, rgba(5,102,217,0.18) 45%, transparent 75%)",
+                filter: "blur(60px)",
+                zIndex: 0,
+                animation: "glowPulseEnv 4s ease-in-out infinite",
+              }}
+            />
 
-            {/* Invitation */}
+            {/* ── Layer 2: Tight halo right behind the image ─────────── */}
+            <div
+              style={{
+                position: "absolute",
+                width: "85%",
+                maxWidth: 500,
+                aspectRatio: "1",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(ellipse, rgba(221,184,255,0.25) 0%, rgba(255,176,205,0.12) 40%, transparent 70%)",
+                filter: "blur(30px)",
+                zIndex: 0,
+                animation: "glowPulseEnv 3s ease-in-out infinite reverse",
+              }}
+            />
+
+            {/* ── Layer 3: Soft ring outline glow ────────────────────── */}
+            <div
+              style={{
+                position: "absolute",
+                width: "80%",
+                maxWidth: 480,
+                aspectRatio: "1",
+                borderRadius: "50%",
+                border: "1px solid rgba(221,184,255,0.18)",
+                boxShadow:
+                  "0 0 40px rgba(147,51,234,0.3), inset 0 0 40px rgba(147,51,234,0.1)",
+                zIndex: 0,
+              }}
+            />
+
+            {/* ── Invitation image ───────────────────────────────────── */}
             <img
               src={invitation}
               alt="Invitation"
@@ -214,8 +259,21 @@ const InvitationEnvelope = () => {
                 rounded-3xl
                 shadow-2xl
               "
+              style={{
+                zIndex: 1,
+                boxShadow:
+                  "0 0 0 1px rgba(221,184,255,0.15), 0 8px 40px rgba(147,51,234,0.4), 0 0 80px rgba(147,51,234,0.2)",
+              }}
             />
+
+            <style>{`
+              @keyframes glowPulseEnv {
+                0%, 100% { opacity: 0.8; transform: scale(1); }
+                50%       { opacity: 1;   transform: scale(1.06); }
+              }
+            `}</style>
           </motion.div>
+
         )}
       </AnimatePresence>
     </section>
